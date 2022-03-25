@@ -26,8 +26,16 @@ class MyApp extends StatelessWidget {
       home: const CategoriesScreen(),
       routes: {
         CategoryMealsScreen.routeName: (ctx) => CategoryMealsScreen(),
-        MealDetailScreen.routeName: (ctx) => MealDetailScreen(),
-      }
+       MealDetailScreen.routeName: (ctx) => MealDetailScreen(),
+      },
+      onGenerateRoute: (settings) {
+        print(settings.arguments);
+        return MaterialPageRoute(builder: (ctx) => CategoriesScreen()); // We define it as "safe" fallback route.
+                                                                        // So when there is no route we wanna go, then it will redirect us here
+      },
+      onUnknownRoute: (settings) {
+        return MaterialPageRoute(builder: (ctx) => CategoriesScreen()); // Prepare some fallback like we could not find that page! :)
+      },
     );
   }
 }
